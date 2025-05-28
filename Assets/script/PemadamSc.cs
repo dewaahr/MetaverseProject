@@ -12,6 +12,6 @@ public class PemadamSc : MonoBehaviour
                 fire.Extinguish();
             }
         }
-        Debug.Log("Particle collision with: " + other.name);
+        Debug.Log(other.name);
     }
 }
