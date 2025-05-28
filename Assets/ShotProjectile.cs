@@ -17,5 +17,16 @@ public class ItemShooter : MonoBehaviour
             if (shotSmoke.isPlaying)
                 shotSmoke.Stop();
         }
+        // }
+        // void OnParticleCollision(GameObject other)
+        // {
+        //     FireController fire = other.GetComponentInParent<FireController>();
+        //     if (fire != null && other.CompareTag("Fire"))
+        //     {
+        //         fire.Extinguish();
+        //     }
+        //     Debug.Log("Particle collision with: " + other.name);
+        // }
+
     }
 }
