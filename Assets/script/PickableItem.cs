@@ -4,42 +4,61 @@ using UnityEngine;
 
 public class PickableItem : MonoBehaviour
 {
-    // Start is called before the first frame update
-
-    GameObject player;
-    ItemController itemController;
-    public int itemIndex;
-    // public string itemName;
-    UiControllerIngame uiControllerIG;
+    private GameObject player;
+    private ItemController itemController;
+    public int itemIndex; // Index of the item in the player's inventory
+    public string itemName; // Name of the item for display purposes
+    public UiControllerIngame uiControllerIG; // Reference to the UI controller
+    private bool isPlayerNearby = false; // To track if the player is within interaction range
 
     void Start()
     {
+        // Find the player object and its ItemController
         player = GameObject.FindWithTag("Player");
-        itemController = player.GetComponent<ItemController>();
-        uiControllerIG = GameObject.Find("Canvas").GetComponent<UiControllerIngame>();
+        if (player != null)
+        {
+            itemController = player.GetComponent<ItemController>();
+        }
     }
 
-    // Update is called once per frame
     void Update()
     {
+        if (player == null) return;
+
+        // Calculate the distance between the player and the item
         float distance = Vector3.Distance(player.transform.position, transform.position);
-        if (distance < 1f) // Jarak interaksi
+
+        // Check if the player is within interaction range
+        if (distance < 1f) // Interaction range
         {
-            // uiControllerIG.popUpPanel("itemPickup");
-            uiControllerIG.enablePanel("ItemPickup");
-            // uiControllerIG.itemPickupPanel.SetActive(true);
-
-            if (Input.GetKeyDown(KeyCode.E) && player != null)
+            if (!isPlayerNearby)
             {
-                itemController.ToggleItem(itemIndex);
-                uiControllerIG.disablePanel("ItemPickup");
-
-                Destroy(gameObject);
+                // Show the pickup UI panel when the player enters the range
+                uiControllerIG.enablePanel("ItemPickup");
+                isPlayerNearby = true;
             }
 
-        }
-        // uiControllerIG.disablePanel
-    }
-    
+            // Check for interaction input
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                // Add the item to the player's inventory
+                itemController.ToggleItem(itemIndex);
 
+                // Disable the UI panel and destroy the item
+                uiControllerIG.disablePanel("ItemPickup");
+                Destroy(gameObject);
+                uiControllerIG.enablePanel(itemName);
+
+            }
+        }
+        else
+        {
+            if (isPlayerNearby)
+            {
+                // Hide the pickup UI panel when the player leaves the range
+                uiControllerIG.disablePanel("ItemPickup");
+                isPlayerNearby = false;
+            }
+        }
+    }
 }

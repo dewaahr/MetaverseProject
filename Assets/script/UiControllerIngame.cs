@@ -52,6 +52,30 @@ public class UiControllerIngame : MonoBehaviour
             case "ItemPickup":
                 itemPickupPanel.SetActive(true);
                 break;
+            case "doorOpen":
+                doorOpenPanel.SetActive(true);
+                break;
+            case "doorNote":
+                doorNotePanel.SetActive(true);
+                break;
+            case "RopeNote":
+                RopeNotePanel.SetActive(true);
+                break;
+            case "AparNote":
+                AparNotePanel.SetActive(true);
+                break;
+            case "IngamePanel":
+                IngamePanel.SetActive(true);
+                break;
+            case "item1":
+                item1Box.SetActive(true);
+                break;
+            case "item2":
+                item2Box.SetActive(true);
+                break;
+            case "item3":
+                item3Box.SetActive(true);
+                break;
         }
     }
 
@@ -65,6 +89,30 @@ public class UiControllerIngame : MonoBehaviour
                 break;
             case "ItemPickup":
                 itemPickupPanel.SetActive(false);
+                break;
+            case "doorOpen":
+                doorOpenPanel.SetActive(false);
+                break;
+            case "doorNote":
+                doorNotePanel.SetActive(false);
+                break;
+            case "RopeNote":
+                RopeNotePanel.SetActive(false);
+                break;
+            case "AparNote":
+                AparNotePanel.SetActive(false);
+                break;
+            case "IngamePanel":
+                IngamePanel.SetActive(false);
+                break;
+            case "item1":
+                item1Box.SetActive(false);
+                break;
+            case "item2":
+                item2Box.SetActive(false);
+                break;
+            case "item3":
+                item3Box.SetActive(false);
                 break;
 
         }
