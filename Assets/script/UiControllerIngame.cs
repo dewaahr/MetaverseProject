@@ -49,6 +49,9 @@ public class UiControllerIngame : MonoBehaviour
                 // MainMenuPanel.SetActive(false);
                 RulesPanel.SetActive(true);
                 break;
+            case "ItemPickup":
+                itemPickupPanel.SetActive(true);
+                break;
         }
     }
 
@@ -60,6 +63,10 @@ public class UiControllerIngame : MonoBehaviour
                 // MainMenuPanel.SetActive(true);
                 RulesPanel.SetActive(false);
                 break;
+            case "ItemPickup":
+                itemPickupPanel.SetActive(false);
+                break;
+
         }
     }
     

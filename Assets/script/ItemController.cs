@@ -15,7 +15,7 @@ public class ItemController : MonoBehaviour
             ToggleItem(2);
     }
 
-    void ToggleItem(int index)
+    public void ToggleItem(int index)
     {
         if (index < 0 || index >= items.Length)
             return;
