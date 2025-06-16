@@ -14,10 +14,19 @@ public class DoorHandler : MonoBehaviour
 
     private Quaternion closedRotation;
     private Quaternion openRotation;
+    ItemController itemController;
+
+    public UiControllerIngame uiControllerIG;
 
     void Start()
     {
         player = GameObject.FindWithTag("Player");
+        itemController = player.GetComponent<ItemController>();
+        // uiControllerIG = player.GetComponent<UiControllerIngame>();
+        if (uiControllerIG == null)
+        {
+            uiControllerIG = GameObject.Find("Canvas").GetComponent<UiControllerIngame>();
+        }
 
         if (doorPanel != null)
         {
@@ -33,12 +42,17 @@ public class DoorHandler : MonoBehaviour
             float distance = Vector3.Distance(player.transform.position, transform.position);
             if (distance < interactDistance)
             {
+                if (itemController.returnActiveItem() != 0)
+                {
+                    uiControllerIG.popUpPanel("doorNote");
+                    Debug.Log(itemController.returnActiveItem());
+                    return;
+                }
                 StartCoroutine(RotateDoor(isOpen ? closedRotation : openRotation));
-                // // transform.Rotate(90, 0, 0);
+
                 isOpen = !isOpen;
             }
         }
-        // doorPanel.transform.Rotate(Vector3.up * 90 * Time.deltaTime);
         
     }
 

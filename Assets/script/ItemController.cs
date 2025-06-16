@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class ItemSwitcher : MonoBehaviour
+public class ItemController : MonoBehaviour
 {
     public GameObject[] items;
     private int currentIndex = -1;
@@ -49,4 +49,10 @@ public class ItemSwitcher : MonoBehaviour
             item.SetActive(false);
         }
     }
+
+    public int returnActiveItem()
+    {
+        return currentIndex;
+    }
+
 }
