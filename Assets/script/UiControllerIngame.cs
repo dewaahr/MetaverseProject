@@ -12,6 +12,7 @@ public class UiControllerIngame : MonoBehaviour
     public GameObject pausePanel;
 
     public GameObject gameOverPanel; // Tambahkan referensi ke panel Game Over
+    public GameObject gameFinishedPanel; // Tambahkan referensi ke panel Game Finished
 
     public GameObject doorNotePanel;
     public GameObject RopeNotePanel;
@@ -32,6 +33,9 @@ public class UiControllerIngame : MonoBehaviour
 
     public bool isPaused = false;
     public bool isGameOver = false; // Tambahkan variabel untuk melacak status game over
+
+    public bool isGameFinished = false; // Tambahkan variabel untuk melacak status game selesai
+
 
     void Awake()
     {
@@ -254,7 +258,10 @@ public class UiControllerIngame : MonoBehaviour
     {
         StartCoroutine(ZoomInPanel(gameOverPanel, 0.5f)); // Zoom in selama 0.5 detik
     }
-
+    public void ShowGameFinishedPanel()
+    {
+        StartCoroutine(ZoomInPanel(gameFinishedPanel, 0.5f)); // Zoom in selama 0.5 detik
+    }
     private IEnumerator ZoomInPanel(GameObject panel, float duration)
     {
         panel.SetActive(true); // Aktifkan panel

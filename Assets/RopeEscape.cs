@@ -69,8 +69,15 @@ public class RopeEscape : MonoBehaviour
 
     private void Escape()
     {
-        Debug.Log("Player escaped successfully!");
-        // Add logic for escaping, such as loading a new scene or showing a success message
-        // Example: SceneManager.LoadScene("VictoryScene");
+        GameManager gameManager = FindObjectOfType<GameManager>();
+        if (gameManager != null)
+        {
+            gameManager.GameFinished(); // Call the GameFinished method in GameManager
+            Debug.Log("Player escaped successfully!");
+        }
+        else
+        {
+            Debug.LogError("GameManager not found in the scene.");
+        }
     }
 }

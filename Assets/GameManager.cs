@@ -3,6 +3,8 @@ using UnityEngine.SceneManagement;
 using System.Collections;
 public class GameManager : MonoBehaviour
 {
+
+    
     public void GameOver()
     {
         UiControllerIngame uiController = FindObjectOfType<UiControllerIngame>();
@@ -22,9 +24,38 @@ public class GameManager : MonoBehaviour
                 playerController.enabled = false; // Nonaktifkan kontrol pemain
             }
         }
+        Cursor.lockState = CursorLockMode.None; // Bebaskan kursor
+        Cursor.visible = true; // Tampilkan kursor
 
         // Kembali ke menu utama setelah 5 detik
         StartCoroutine(ReturnToMainMenuAfterDelay(5f));
+    }
+
+    public void GameFinished()
+    {
+        UiControllerIngame uiController = FindObjectOfType<UiControllerIngame>();
+        if (uiController != null)
+        {
+            uiController.isGameFinished = true; // Tandai bahwa game sudah selesai
+            uiController.ShowGameFinishedPanel();
+        }
+
+        // Nonaktifkan kontrol pemain
+        GameObject player = GameObject.FindWithTag("Player");
+        if (player != null)
+        {
+            FirstPersonController playerController = player.GetComponent<FirstPersonController>();
+            if (playerController != null)
+            {
+                playerController.enabled = false; // Nonaktifkan kontrol pemain
+            }
+        }
+
+                Cursor.lockState = CursorLockMode.None; // Bebaskan kursor
+        Cursor.visible = true; // Tampilkan kursor
+        // Kembali ke menu utama setelah 5 detik
+        StartCoroutine(ReturnToMainMenuAfterDelay(5f));
+        
     }
 
     private IEnumerator ReturnToMainMenuAfterDelay(float delay)
