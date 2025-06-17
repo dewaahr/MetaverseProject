@@ -8,9 +8,6 @@ public class UIController : MonoBehaviour
     public GameObject MainMenuPanel;
     public GameObject RulesPanel;
 
-
-    private MonoBehaviour playerSc;
-
     void Awake()
     {
         MainMenuPanel.SetActive(true);

@@ -87,6 +87,8 @@ public class CamControll : MonoBehaviour
         // Wait for the sound to finish before starting the wake-up effect
         if (!audioSource.isPlaying)
         {
+            GameManager gameManager = FindObjectOfType<GameManager>();
+            gameManager.enableContainer(); // Enable the fire and smoke containers
             if (timer < wakeUpDuration)
             {
                 timer += Time.deltaTime;
@@ -163,13 +165,10 @@ public class CamControll : MonoBehaviour
     // Called by the button in the Rules Panel
     public void StartGame()
     {
-        // Hide the Rules Panel and start the game
         uiControllerIG.disablePanel("Rules");
 
-        // Enable player controls
         playerController.enabled = true;
 
-        // Restore the cursor's opacity
         UnityEngine.UI.Image cursorImage = cursor.GetComponent<UnityEngine.UI.Image>();
         if (cursorImage != null)
         {
@@ -177,11 +176,7 @@ public class CamControll : MonoBehaviour
             cursorColor.a = 1f; // Set alpha back to 1 (fully visible)
             cursorImage.color = cursorColor;
         }
-
-        // Enable the Ingame Panel
         uiControllerIG.enablePanel("IngamePanel");
-
-        // Disable this script after starting the game
         this.enabled = false;
     }
 }
