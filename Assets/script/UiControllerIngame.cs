@@ -22,18 +22,19 @@ public class UiControllerIngame : MonoBehaviour
     public GameObject item3Box;
 
 
+    // AreaTriggerCont hand
+    public GameObject ShiftTrigger;
+    public GameObject RopeTrigger;
+    public GameObject AparTrigger;
+    public GameObject WetRagPanel;
 
 
-
-    private bool isPaused = false;
-    private bool isGameOver = false;
-    private bool isStarted = false;
 
     void Awake()
     {
         // RulesPanel.SetActive(true);
-        IngamePanel.SetActive(true);
-        pausePanel.SetActive(false);
+        // IngamePanel.SetActive(true);
+        // pausePanel.SetActive(false);
     }
 
     // Update is called once per frame
@@ -41,8 +42,12 @@ public class UiControllerIngame : MonoBehaviour
     {
 
     }
+
+    
     public void enablePanel(string panelName)
     {
+            Debug.Log($"enablePanel called with panelName: {panelName}");
+
         switch (panelName)
         {
             case "Rules":
@@ -138,6 +143,20 @@ public class UiControllerIngame : MonoBehaviour
             case "itemPickup":
                 panelToShow = itemPickupPanel;
                 break;
+            case "ShiftTrigger":
+                panelToShow = ShiftTrigger;
+                break;
+            case "RopeTrigger":
+                panelToShow = RopeTrigger;
+                break;
+            case "AparTrigger":
+                panelToShow = AparTrigger;
+                break;
+            case "WetRag":
+                panelToShow = WetRagPanel;
+                break; 
+    
+
         }
         if (panelToShow != null)
         {

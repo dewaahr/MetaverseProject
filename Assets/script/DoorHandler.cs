@@ -4,7 +4,7 @@ using UnityEngine;
 public class DoorHandler : MonoBehaviour
 {
     private GameObject player;
-    private ItemController itemController;
+    // private ItemController itemController;
     public GameObject doorPanel; // The door object to rotate
     public float rotationDuration = 1f; // Duration of the door rotation
     public float openAngle = 90f; // Angle to open the door
@@ -18,18 +18,17 @@ public class DoorHandler : MonoBehaviour
     private Quaternion closedRotation;
     private Quaternion openRotation;
 
+    ItemController itemController; // Reference to the ItemController script
+
     void Start()
     {
         // Find the player object and its ItemController
         player = GameObject.FindWithTag("Player");
-        if (player != null)
-        {
-            itemController = player.GetComponent<ItemController>();
-        }
+        itemController = player.GetComponent<ItemController>();
 
         // Set the door's closed and open rotations
         if (doorPanel != null)
-        {
+        {   
             closedRotation = doorPanel.transform.rotation;
             openRotation = closedRotation * Quaternion.Euler(0, openAngle, 0);
         }
@@ -55,12 +54,16 @@ public class DoorHandler : MonoBehaviour
             // Check for interaction input
             if (Input.GetKeyDown(KeyCode.F) && !isRotating)
             {
-                // Check if the player has the required item
-                if (itemController != null && itemController.returnActiveItem() != 0)
+                // Check if the first item is active and wet
+                if (itemController != null)
                 {
-                    uiControllerIG.popUpPanel("doorNote");
-                    Debug.Log("Active Item: " + itemController.returnActiveItem());
-                    return;
+                    int activeItem = itemController.returnActiveItem();
+                    if (activeItem != 1 || !itemController.IsFirstItemWet()) // First item must be active and wet
+                    {
+                        uiControllerIG.popUpPanel("doorNote");
+                        Debug.Log("The first item is not wet or not active.");
+                        return;
+                    }
                 }
 
                 // Rotate the door

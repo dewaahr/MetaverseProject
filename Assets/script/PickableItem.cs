@@ -5,7 +5,7 @@ using UnityEngine;
 public class PickableItem : MonoBehaviour
 {
     private GameObject player;
-    private ItemController itemController;
+    ItemController itemController;
     public int itemIndex; // Index of the item in the player's inventory
     public string itemName; // Name of the item for display purposes
     public UiControllerIngame uiControllerIG; // Reference to the UI controller
@@ -42,13 +42,30 @@ public class PickableItem : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.E))
             {
                 // Add the item to the player's inventory
-                itemController.ToggleItem(itemIndex);
+                itemController.PickUpItem(itemIndex);
 
                 // Disable the UI panel and destroy the item
                 uiControllerIG.disablePanel("ItemPickup");
+
                 Destroy(gameObject);
                 uiControllerIG.enablePanel(itemName);
+                if (itemName == "item1")
+                {
 
+                    // If the first item is picked up, set it as wet
+                    // itemController.SetItemWet(itemIndex);
+                    uiControllerIG.popUpPanel("WetRag");
+                    if (itemIndex == 0)
+                    {
+                        itemController.SetItemWet(itemIndex);
+                        Debug.Log("Item 0 has been set to wet.");
+                    }
+                    else
+                    {
+                        Debug.Log("This item cannot be set to wet.");
+                    }
+                }
+                Debug.Log($"Picked up {itemName} (Index: {itemIndex})");
             }
         }
         else
