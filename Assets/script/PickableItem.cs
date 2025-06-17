@@ -57,7 +57,7 @@ public class PickableItem : MonoBehaviour
                     uiControllerIG.popUpPanel("WetRag");
                     if (itemIndex == 0)
                     {
-                        itemController.SetItemWet(itemIndex);
+                        // itemController.SetItemWet(itemIndex);
                         Debug.Log("Item 0 has been set to wet.");
                     }
                     else

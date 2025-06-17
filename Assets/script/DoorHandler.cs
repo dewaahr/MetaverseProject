@@ -54,14 +54,14 @@ public class DoorHandler : MonoBehaviour
             // Check for interaction input
             if (Input.GetKeyDown(KeyCode.F) && !isRotating)
             {
-                // Check if the first item is active and wet
+                // Check if item 0 is active and wet
                 if (itemController != null)
                 {
                     int activeItem = itemController.returnActiveItem();
-                    if (activeItem != 1 || !itemController.IsFirstItemWet()) // First item must be active and wet
+                    if (activeItem != 0 || !itemController.IsFirstItemWet()) // Item 0 must be active AND wet
                     {
                         uiControllerIG.popUpPanel("doorNote");
-                        Debug.Log("The first item is not wet or not active.");
+                        Debug.Log("Item 0 is not wet or not active.");
                         return;
                     }
                 }

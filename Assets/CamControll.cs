@@ -40,7 +40,15 @@ public class CamControll : MonoBehaviour
         uiControllerIG.disablePanel("IngamePanel");
         uiControllerIG.disablePanel("Rules");
         playerController.enabled = false; // Disable player controls initially
-        cursor.SetActive(false); // Disable cursor visibility initially
+
+        // Set cursor image opacity to 0 instead of deactivating it
+        UnityEngine.UI.Image cursorImage = cursor.GetComponent<UnityEngine.UI.Image>();
+        if (cursorImage != null)
+        {
+            Color cursorColor = cursorImage.color;
+            cursorColor.a = 0f; // Set alpha to 0
+            cursorImage.color = cursorColor;
+        }
     }
 
     void Start()
@@ -158,9 +166,17 @@ public class CamControll : MonoBehaviour
         // Hide the Rules Panel and start the game
         uiControllerIG.disablePanel("Rules");
 
-        // Enable player controls and cursor
+        // Enable player controls
         playerController.enabled = true;
-        cursor.SetActive(true);
+
+        // Restore the cursor's opacity
+        UnityEngine.UI.Image cursorImage = cursor.GetComponent<UnityEngine.UI.Image>();
+        if (cursorImage != null)
+        {
+            Color cursorColor = cursorImage.color;
+            cursorColor.a = 1f; // Set alpha back to 1 (fully visible)
+            cursorImage.color = cursorColor;
+        }
 
         // Enable the Ingame Panel
         uiControllerIG.enablePanel("IngamePanel");
